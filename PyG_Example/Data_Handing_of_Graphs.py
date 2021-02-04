@@ -69,3 +69,7 @@ data_2 = Data(x=x, edge_index=edge_index_2, y=[0,1,2])
 # is_directed() 判断是否有向
 print("data_1:", data_1, "data_1.num_edges:", data_1.num_edges, "data_1.contains_isolated_nodes():", data_1.contains_isolated_nodes(), "data_1.contains_self_loops():", data_1.contains_self_loops(), "data_1.is_directed():", data_1.is_directed())
 print("data_2:", data_2, "data_2.num_edges:", data_2.num_edges, "data_2.contains_isolated_nodes():", data_2.contains_isolated_nodes(), "data_2.contains_self_loops():", data_2.contains_self_loops(), "data_2.is_directed():", data_2.is_directed())
+# GPU or CPU
+device = torch.device('cuda')
+data_1 = data_1.to(device)
+data_2 = data_2.to(device)
