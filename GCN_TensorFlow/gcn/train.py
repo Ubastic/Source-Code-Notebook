@@ -95,6 +95,8 @@ def evaluate(features, support, labels, mask, placeholders):
 
 
 # Init variables
+# 必须要使用global_variables_initializer的场合
+# 含有tf.Variable的环境下，因为tf中建立的变量是没有初始化的，也就是在debug时还不是一个tensor量，而是一个Variable变量类型
 sess.run(tf.global_variables_initializer())
 
 cost_val = []
