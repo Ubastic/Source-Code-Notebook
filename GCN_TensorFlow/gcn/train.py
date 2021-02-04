@@ -111,6 +111,11 @@ for epoch in range(FLAGS.epochs):
     feed_dict.update({placeholders['dropout']: FLAGS.dropout})
 
     # Training step
+    # 根据再TensorFlow计算图中的位置
+    # 先执行self.opt_op = self.optimizer.minimize(self.loss) -> 执行 self.loss
+    # 整个计算过程变为执行loss的计算
+    # 再计算完loss之后根据所采用的优化函数完成反向传播梯度下降
+    # 之后根据此时模型的参数计算模型的准确率
     outs = sess.run([model.opt_op, model.loss, model.accuracy], feed_dict=feed_dict)
 
     # Validation
