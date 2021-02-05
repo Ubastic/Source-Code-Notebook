@@ -80,6 +80,7 @@ placeholders = {
 }
 
 # Create model
+# -> models.py class GCN(Model):
 model = model_func(placeholders, input_dim=features[2][1], logging=True)
 
 # Initialize session

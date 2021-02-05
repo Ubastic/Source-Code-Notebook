@@ -129,7 +129,7 @@ class Dense(Layer):
 
         return self.act(output)
 
-
+# -> layers.py class Layer(object):
 class GraphConvolution(Layer):
     """Graph convolution layer."""
     def __init__(self, input_dim, output_dim, placeholders, dropout=0.,

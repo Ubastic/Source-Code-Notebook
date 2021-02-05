@@ -38,12 +38,15 @@ class Model(object):
 
     def build(self):
         """ Wrapper for _build() """
+        # -> class GCN(Model):  def _build(self):
         with tf.variable_scope(self.name):
             self._build()
 
         # Build sequential layer model
         self.activations.append(self.inputs)
         for layer in self.layers:
+            # -> layers.py  class Layer(object): def __call__(self, inputs):
+            # -> layers.py  class GraphConvolution(Layer):     def _call(self, inputs):
             hidden = layer(self.activations[-1])
             self.activations.append(hidden)
         self.outputs = self.activations[-1]
@@ -129,7 +132,7 @@ class MLP(Model):
     def predict(self):
         return tf.nn.softmax(self.outputs)
 
-
+# -> models.py class Model(object):
 class GCN(Model):
     def __init__(self, placeholders, input_dim, **kwargs):
         super(GCN, self).__init__(**kwargs)
@@ -141,7 +144,7 @@ class GCN(Model):
         self.placeholders = placeholders
 
         self.optimizer = tf.train.AdamOptimizer(learning_rate=FLAGS.learning_rate)
-
+        # -> models.py class Model(object): -> def build(self):
         self.build()
 
     def _loss(self):
@@ -158,7 +161,7 @@ class GCN(Model):
                                         self.placeholders['labels_mask'])
 
     def _build(self):
-
+        # -> layers.py class GraphConvolution(Layer):
         self.layers.append(GraphConvolution(input_dim=self.input_dim,
                                             output_dim=FLAGS.hidden1,
                                             placeholders=self.placeholders,
